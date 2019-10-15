@@ -125,10 +125,10 @@ class Numeric < Object
   def abs2: () -> Numeric
 
   # Returns 0 if the value is positive, pi otherwise.
-  def angle: () -> Numeric
+  def angle: () -> (0 | Float)
 
   # Returns 0 if the value is positive, pi otherwise.
-  def arg: () -> Numeric
+  def arg: () -> (0 | Float)
 
   # Returns the smallest number greater than or equal to `num` with a
   # precision of `ndigits` decimal digits (default: 0).

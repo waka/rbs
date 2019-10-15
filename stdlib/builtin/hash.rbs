@@ -325,7 +325,7 @@ class Hash[K, V] < Object
 
   def reject!: () { (K arg0, V arg1) -> any } -> ::Hash[K, V]
 
-  def select: () { (K arg0, V arg1) -> any } -> ::Hash[K, V]
+  incompatible def select: () { (K arg0, V arg1) -> any } -> ::Hash[K, V]
 
   def select!: () { (K arg0, V arg1) -> any } -> ::Hash[K, V]
 

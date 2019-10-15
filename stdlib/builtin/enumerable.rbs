@@ -79,7 +79,7 @@ module Enumerable[Elem, Return]: _Each[Elem, Return]
   def each_cons: (Integer n) { (::Array[Elem] arg0) -> any } -> NilClass
                | (Integer n) -> ::Enumerator[::Array[Elem], Return]
 
-  def each_with_index: () { (Elem arg0, Integer arg1) -> any } -> ::Enumerable[Elem, Return]
+  def each_with_index: () { (Elem arg0, Integer arg1) -> any } -> Return
                      | () -> ::Enumerator[[ Elem, Integer ], Return]
 
   def each_with_object: [U] (U arg0) { (Elem arg0, any arg1) -> any } -> U
@@ -320,8 +320,8 @@ module Enumerable[Elem, Return]: _Each[Elem, Return]
             | (?Elem initial) { (Elem arg0, Elem arg1) -> Elem } -> Elem
             | () { (Elem arg0, Elem arg1) -> Elem } -> Elem?
 
-  def select: () { (Elem arg0) -> any } -> ::Array[Elem]
-            | () -> ::Enumerator[Elem, Return]
+  incompatible def select: () { (Elem arg0) -> any } -> ::Array[Elem]
+                         | () -> ::Enumerator[Elem, Return]
 
   # Returns an array containing the items in *enum* .
   # 

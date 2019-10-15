@@ -90,7 +90,7 @@
 class Range[Elem] < Object
   include Enumerable[Elem, Range[Elem]]
 
-  def self.new: [U] (U from, U to, ?bool exclude_end) -> ::Range[U]
+  incompatible def self.new: [U] (U from, U to, ?bool exclude_end) -> ::Range[U]
 
   def ==: (any obj) -> bool
 

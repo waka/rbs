@@ -37,7 +37,7 @@ class Module < Object
   # ```
   # 
   # The second form calls the instance method `constants` .
-  def self.constants: () -> ::Array[Integer]
+  incompatible def self.constants: () -> ::Array[Symbol]
 
   # Returns the list of `Modules` nested at the point of call.
   # 
@@ -92,9 +92,9 @@ class Module < Object
 
   def `attr_writer`: (*Symbol | String arg0) -> NilClass
 
-  def autoload: (Symbol _module, String filename) -> NilClass
+  def autoload: (String | Symbol _module, String filename) -> NilClass
 
-  def autoload?: (Symbol name) -> String?
+  def autoload?: (Symbol | String name) -> String?
 
   def class_eval: (String arg0, ?String filename, ?Integer lineno) -> any
                 | [U] (any arg0) { (any m) -> U } -> U

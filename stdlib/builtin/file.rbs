@@ -27,7 +27,9 @@
 # Various constants for the methods in [File](File)
 # can be found in
 # [File::Constants](https://ruby-doc.org/core-2.6.3/File/Constants.html).
-class File[Elem] < IO
+class File < IO
+  include Enumerable[String, File]
+
   def self.absolute_path: (String file, ?String dir) -> String
 
   def self.atime: (any file) -> Time
@@ -178,6 +180,9 @@ class File[Elem] < IO
   def flock: (Integer arg0) -> (Integer | TrueClass | FalseClass)
 
   def initialize: (String file, ?String mode, ?String perm, ?Integer opt) -> void
+
+  def each: (?String sep, ?Integer limit) { (String arg0) -> any } -> self
+          | (?String sep, ?Integer limit) -> ::Enumerator[String, self]
 
   # Same as `IO#stat`, but does not follow the last symbolic link. Instead,
   # reports on the link itself.

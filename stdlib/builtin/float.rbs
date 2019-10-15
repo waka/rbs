@@ -98,10 +98,10 @@ class Float < Numeric
   def abs2: () -> Float
 
   # Returns 0 if the value is positive, pi otherwise.
-  def angle: () -> (Integer | Float)
+  def angle: () -> (0 | Float)
 
   # Returns 0 if the value is positive, pi otherwise.
-  def arg: () -> (Integer | Float)
+  def arg: () -> (0 | Float)
 
   # Returns the smallest number greater than or equal to `float` with a
   # precision of `ndigits` decimal digits (default: 0).

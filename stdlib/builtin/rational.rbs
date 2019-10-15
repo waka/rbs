@@ -124,9 +124,9 @@ class Rational < Numeric
 
   def abs2: () -> Rational
 
-  def angle: () -> Numeric
+  def angle: () -> (0 | Float)
 
-  def arg: () -> Numeric
+  def arg: () -> (0 | Float)
 
   # Returns the smallest number greater than or equal to `rat` with a
   # precision of `ndigits` decimal digits (default: 0).

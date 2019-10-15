@@ -273,7 +273,7 @@ class Thread < Object
   # [Thread](Thread.downloaded.ruby_doc).
   # 
   # If this is the main thread, or the last thread, exits the process.
-  def exit: () -> Thread?
+  incompatible def exit: () -> Thread?
 
   # Returns a fiber-local for the given key. If the key can’t be found,
   # there are several options: With no other arguments, it will raise a
@@ -625,13 +625,13 @@ class Thread < Object
   # [Thread](Thread.downloaded.ruby_doc).
   # 
   # If this is the main thread, or the last thread, exit the process.
-  def self.exit: () -> any
+  incompatible def self.exit: () -> any
 
   # Basically the same as [::new](Thread.downloaded.ruby_doc#method-c-new).
   # However, if class [Thread](Thread.downloaded.ruby_doc) is subclassed,
   # then calling `start` in that subclass will not invoke the subclass’s
   # `initialize` method.
-  def self.fork: (*any args) -> any
+  incompatible def self.fork: (*any args) { (*any args) -> void } -> instance
 
   # Changes asynchronous interrupt timing.
   # 

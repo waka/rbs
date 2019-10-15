@@ -595,8 +595,8 @@ class Array[Elem] < Object
   def sample: () -> Elem?
             | (?Integer arg0) -> ::Array[Elem]
 
-  def select: () { (Elem arg0) -> any } -> ::Array[Elem]
-            | () -> ::Enumerator[Elem, self]
+  incompatible def select: () { (Elem arg0) -> any } -> ::Array[Elem]
+                         | () -> ::Enumerator[Elem, self]
 
   def select!: () { (Elem arg0) -> any } -> ::Array[Elem]
              | () -> ::Enumerator[Elem, self]
