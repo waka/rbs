@@ -90,13 +90,13 @@ class Integer < Numeric
   def ^: (Integer arg0) -> Integer
 
   # Returns the absolute value of `int` .
-  # 
+  #
   # ```ruby
   # (-12345).abs   #=> 12345
   # -12345.abs     #=> 12345
   # 12345.abs      #=> 12345
   # ```
-  # 
+  #
   # [\#magnitude](Integer.downloaded.ruby_doc#method-i-magnitude) is an
   # alias for [\#abs](Integer.downloaded.ruby_doc#method-i-abs).
   def abs: () -> Integer
@@ -108,14 +108,14 @@ class Integer < Numeric
   def arg: () -> (0 | Float)
 
   # Returns the number of bits of the value of `int` .
-  # 
+  #
   # "Number of bits" means the bit position of the highest bit which is
   # different from the sign bit (where the least significant bit has bit
   # position 1). If there is no such bit (zero or minus one), zero is
   # returned.
-  # 
+  #
   # I.e. this method returns *ceil(log2(int \< 0 ? -int : int+1))* .
-  # 
+  #
   # ```ruby
   # (-2**1000-1).bit_length   #=> 1001
   # (-2**1000).bit_length     #=> 1000
@@ -139,11 +139,11 @@ class Integer < Numeric
   # (2**1000).bit_length      #=> 1001
   # (2**1000+1).bit_length    #=> 1001
   # ```
-  # 
+  #
   # This method can be used to detect overflow in
   # [Array\#pack](https://ruby-doc.org/core-2.6.3/Array.html#method-i-pack)
   # as follows:
-  # 
+  #
   # ```ruby
   # if n.bit_length < 32
   #   [n].pack("l") # no overflow
@@ -155,12 +155,12 @@ class Integer < Numeric
 
   # Returns the smallest number greater than or equal to `int` with a
   # precision of `ndigits` decimal digits (default: 0).
-  # 
+  #
   # When the precision is negative, the returned value is an integer with at
   # least `ndigits.abs` trailing zeros.
-  # 
+  #
   # Returns `self` when `ndigits` is zero or positive.
-  # 
+  #
   # ```ruby
   # 1.ceil           #=> 1
   # 1.ceil(2)        #=> 1
@@ -172,7 +172,7 @@ class Integer < Numeric
 
   # Returns a string containing the character represented by the `int` 's
   # value according to `encoding` .
-  # 
+  #
   # ```ruby
   # 65.chr    #=> "A"
   # 230.chr   #=> "\xE6"
@@ -181,7 +181,7 @@ class Integer < Numeric
   def chr: () -> String
          | (?Encoding | String arg0) -> String
 
-  def coerce: (Numeric arg0) -> [ Integer | Float | Rational | BigDecimal, Integer | Float | Rational | BigDecimal ]
+  def coerce: (any arg0) -> [ any, any ]
 
   def conj: () -> Integer
 
@@ -195,7 +195,8 @@ class Integer < Numeric
          | (Rational arg0) -> Integer
          | (BigDecimal arg0) -> Integer
 
-  def divmod: (Integer | Float | Rational | BigDecimal arg0) -> [ Integer | Float | Rational | BigDecimal, Integer | Float | Rational | BigDecimal ]
+  def divmod: (Integer) -> [Integer, Integer ]
+            | super
 
   def downto: (Integer limit) { (Integer arg0) -> any } -> Integer
             | (Integer limit) -> ::Enumerator[Integer, self]
@@ -212,15 +213,16 @@ class Integer < Numeric
           | (Rational arg0) -> Float
           | (BigDecimal arg0) -> BigDecimal
           | (Complex arg0) -> Complex
+          | super
 
   # Returns the largest number less than or equal to `int` with a precision
   # of `ndigits` decimal digits (default: 0).
-  # 
+  #
   # When the precision is negative, the returned value is an integer with at
   # least `ndigits.abs` trailing zeros.
-  # 
+  #
   # Returns `self` when `ndigits` is zero or positive.
-  # 
+  #
   # ```ruby
   # 1.floor           #=> 1
   # 1.floor(2)        #=> 1
@@ -250,13 +252,13 @@ class Integer < Numeric
   def lcm: (Integer arg0) -> Integer
 
   # Returns the absolute value of `int` .
-  # 
+  #
   # ```ruby
   # (-12345).abs   #=> 12345
   # -12345.abs     #=> 12345
   # 12345.abs      #=> 12345
   # ```
-  # 
+  #
   # [\#magnitude](Integer.downloaded.ruby_doc#method-i-magnitude) is an
   # alias for [\#abs](Integer.downloaded.ruby_doc#method-i-abs).
   def magnitude: () -> Integer
@@ -268,7 +270,7 @@ class Integer < Numeric
 
   # Returns the successor of `int`, i.e. the
   # [Integer](Integer.downloaded.ruby_doc) equal to `int+1` .
-  # 
+  #
   # ```ruby
   # 1.next      #=> 2
   # (-1).next   #=> 0
@@ -284,14 +286,14 @@ class Integer < Numeric
   def odd?: () -> bool
 
   # Returns the `int` itself.
-  # 
+  #
   # ```ruby
   # 97.ord   #=> 97
   # ```
-  # 
+  #
   # This method is intended for compatibility to character literals in Ruby
   # 1.9.
-  # 
+  #
   # For example, `?a.ord` returns 97 both in 1.8 and 1.9.
   def ord: () -> Integer
 
@@ -299,7 +301,7 @@ class Integer < Numeric
 
   # Returns the predecessor of `int`, i.e. the
   # [Integer](Integer.downloaded.ruby_doc) equal to `int-1` .
-  # 
+  #
   # ```ruby
   # 1.pred      #=> 0
   # (-1).pred   #=> -2
@@ -328,23 +330,23 @@ class Integer < Numeric
 
   # Returns `int` rounded to the nearest value with a precision of `ndigits`
   # decimal digits (default: 0).
-  # 
+  #
   # When the precision is negative, the returned value is an integer with at
   # least `ndigits.abs` trailing zeros.
-  # 
+  #
   # Returns `self` when `ndigits` is zero or positive.
-  # 
+  #
   # ```ruby
   # 1.round           #=> 1
   # 1.round(2)        #=> 1
   # 15.round(-1)      #=> 20
   # (-15).round(-1)   #=> -20
   # ```
-  # 
+  #
   # The optional `half` keyword argument is available similar to
   # [Float\#round](https://ruby-doc.org/core-2.6.3/Float.html#method-i-round)
   # .
-  # 
+  #
   # ```ruby
   # 25.round(-1, half: :up)      #=> 30
   # 25.round(-1, half: :down)    #=> 20
@@ -361,7 +363,7 @@ class Integer < Numeric
 
   # Returns the number of bytes in the machine representation of `int`
   # (machine dependent).
-  # 
+  #
   # ```ruby
   # 1.size               #=> 8
   # -1.size              #=> 8
@@ -374,7 +376,7 @@ class Integer < Numeric
 
   # Returns the successor of `int`, i.e. the
   # [Integer](Integer.downloaded.ruby_doc) equal to `int+1` .
-  # 
+  #
   # ```ruby
   # 1.next      #=> 2
   # (-1).next   #=> 0
@@ -396,20 +398,20 @@ class Integer < Numeric
 
   # Since `int` is already an [Integer](Integer.downloaded.ruby_doc),
   # returns `self` .
-  # 
+  #
   # [to\_int](Integer.downloaded.ruby_doc#method-i-to_int) is an alias for
   # [to\_i](Integer.downloaded.ruby_doc#method-i-to_i).
   def to_i: () -> Integer
 
   # Since `int` is already an [Integer](Integer.downloaded.ruby_doc),
   # returns `self` .
-  # 
+  #
   # [to\_int](Integer.downloaded.ruby_doc#method-i-to_int) is an alias for
   # [to\_i](Integer.downloaded.ruby_doc#method-i-to_i).
   def to_int: () -> Integer
 
   # Returns the value as a rational.
-  # 
+  #
   # ```ruby
   # 1.to_r        #=> (1/1)
   # (1<<64).to_r  #=> (18446744073709551616/1)
@@ -418,7 +420,7 @@ class Integer < Numeric
 
   # Returns a string containing the place-value representation of `int` with
   # radix `base` (between 2 and 36).
-  # 
+  #
   # ```ruby
   # 12345.to_s       #=> "12345"
   # 12345.to_s(2)    #=> "11000000111001"
@@ -428,20 +430,20 @@ class Integer < Numeric
   # 12345.to_s(36)   #=> "9ix"
   # 78546939656932.to_s(36)  #=> "rubyrules"
   # ```
-  # 
-  # 
-  # 
+  #
+  #
+  #
   # Also aliased as: [inspect](Integer.downloaded.ruby_doc#method-i-inspect)
   def to_s: (?Integer base) -> String
 
   # Returns `int` truncated (toward zero) to a precision of `ndigits`
   # decimal digits (default: 0).
-  # 
+  #
   # When the precision is negative, the returned value is an integer with at
   # least `ndigits.abs` trailing zeros.
-  # 
+  #
   # Returns `self` when `ndigits` is zero or positive.
-  # 
+  #
   # ```ruby
   # 1.truncate           #=> 1
   # 1.truncate(2)        #=> 1
