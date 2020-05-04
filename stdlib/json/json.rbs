@@ -123,10 +123,6 @@ module JSON
 
   def self.deep_const_get: (_ToS path) -> untyped
 
-  def self.dump: (_ToJson obj, ?Integer limit) -> String
-               | (_ToJson obj, _JsonToWritableIO anIO) -> _JsonWrite
-               | (_ToJson obj, _JsonWrite anIO, ?Integer limit) -> _JsonWrite
-
   # The global default options for the JSON.dump method:
   #     :max_nesting: false
   #     :allow_nan: true
@@ -136,11 +132,7 @@ module JSON
 
   def self.dump_default_options=: (json_options) -> json_options
 
-  def self.fast_generate: (_ToJson obj, ?json_options opts) -> String
-
   alias self.fast_unparse self.fast_generate
-
-  def self.generate: (_ToJson obj, ?json_options opts) -> String
 
   # Returns the JSON generator module that is used by JSON. This is either
   # JSON::Ext::Generator or JSON::Pure::Generator.
@@ -153,8 +145,6 @@ module JSON
   #
   def self.iconv: (encoding to, encoding from, String string) -> String
 
-  def self.load: (string | _JsonReadableIO | _JsonRead source, ?Proc proc, ?json_options options) -> untyped
-
   # The global default options for the JSON.load method:
   #     :max_nesting: false
   #     :allow_nan: true
@@ -163,10 +153,6 @@ module JSON
   def self.load_default_options: () -> json_options
 
   def self.load_default_options=: (json_options) -> json_options
-
-  def self.parse: (string source, ?json_options opts) -> untyped
-
-  def self.parse!: (string source, ?json_options opts) -> untyped
 
   # Returns the JSON parser class that is used by JSON. This is either
   # JSON::Ext::Parser or JSON::Pure::Parser.
@@ -210,9 +196,9 @@ module JSON
   # This method is part of the implementation of the load/dump interface of
   # Marshal and YAML.
   #
-  def dump: (_ToJson obj, ?Integer limit) -> String
-          | (_ToJson obj, _JsonToWritableIO anIO) -> _JsonWrite
-          | (_ToJson obj, _JsonWrite anIO, ?Integer limit) -> _JsonWrite
+  def self?.dump: (_ToJson obj, ?Integer limit) -> String
+                | (_ToJson obj, _JsonToWritableIO anIO) -> _JsonWrite
+                | (_ToJson obj, _JsonWrite anIO, ?Integer limit) -> _JsonWrite
 
   # Generate a JSON document from the Ruby data structure *obj* and return it.
   # This method disables the checks for circles in Ruby objects.
@@ -220,7 +206,7 @@ module JSON
   # **WARNING**: Be careful not to pass any Ruby data structures with circles as
   # *obj* argument because this will cause JSON to go into an infinite loop.
   #
-  def fast_generate: (_ToJson obj, ?json_options opts) -> String
+  def self?.fast_generate: (_ToJson obj, ?json_options opts) -> String
 
   alias fast_unparse fast_generate
 
@@ -256,7 +242,7 @@ module JSON
   # amount of sanity checks, and the pretty_generate method for some defaults for
   # pretty output.
   #
-  def generate: (_ToJson obj, ?json_options opts) -> String
+  def self?.generate: (_ToJson obj, ?json_options opts) -> String
 
   # Load a ruby data structure from a JSON *source* and return it. A source can
   # either be a string-like object, an IO-like object, or an object responding to
@@ -272,7 +258,7 @@ module JSON
   # This method is part of the implementation of the load/dump interface of
   # Marshal and YAML.
   #
-  def load: (string | _JsonReadableIO | _JsonRead source, ?Proc proc, ?json_options options) -> untyped
+  def self?.load: (string | _JsonReadableIO | _JsonRead source, ?Proc proc, ?json_options options) -> untyped
 
   # Parse the JSON document *source* into a Ruby data structure and return it.
   #
@@ -292,7 +278,7 @@ module JSON
   # *   **array_class**: Defaults to Array
   #
   #
-  def parse: (string source, ?json_options opts) -> untyped
+  def self?.parse: (string source, ?json_options opts) -> untyped
 
   # Parse the JSON document *source* into a Ruby data structure and return it. The
   # bang version of the parse method defaults to the more dangerous values for the
@@ -311,7 +297,7 @@ module JSON
   #     false.
   #
   #
-  def parse!: (string source, ?json_options opts) -> untyped
+  def self?.parse!: (string source, ?json_options opts) -> untyped
 
   # Generate a JSON document from the Ruby data structure *obj* and return it. The
   # returned document is a prettier form of the document returned by #unparse.
