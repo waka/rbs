@@ -42,6 +42,10 @@ module TestHelper
     end
   end
 
+  def namespace(string)
+    RBS::Namespace.parse(string)
+  end
+
   def silence_warnings
     RBS.logger.stub :warn, nil do
       yield
